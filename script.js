@@ -2,7 +2,7 @@
 let generateBtn = document.querySelector('#generate');
 
 //creating a function that makes an array of numbers using a starting point and an end point in order to use it later to make an array of character set numbers for different character types criteria
-function arrayMaker (num1, num2) {
+function arrayMaker(num1, num2) {
   let array = [];
   for (let i = num1; i <= num2; i++) {
     array.push(i);
@@ -25,11 +25,16 @@ function askQuestions() {
     let hasLowercase = confirm("Do you want your password to include lowercase letters?");
     let hasNumber = confirm("Do you want your password to include numbers?");
     let hasSpecialCharacters = confirm("Do you want your password to include special characters?");
-    generatePassword(numOfChracaters, hasUppercase, hasLowercase, hasNumber, hasSpecialCharacters);
+
+    let prefrencesArray = [numOfChracaters, hasUppercase, hasLowercase, hasNumber, hasSpecialCharacters];
+    return prefrencesArray;
   } else {
     askQuestions();
   }
 }
+
+//saving the returned array from askQuestions() function into a variable so it can be used to fill out the required arguments for generatePassword function
+let prefrencesArray = askQuestions();
 
 function generatePassword(length, upper, lower, number, symbol) {
   //start with an empty string that will be our generated password
@@ -37,16 +42,16 @@ function generatePassword(length, upper, lower, number, symbol) {
 
   //defining another empty array as a starting point that can be concatenated to the arrays we already have based on the criteria the user choose.
   let refernceCodeNumbers = [];
-  if (upper) {
+  if (prefrencesArray[1]) {
     refernceCodeNumbers = refernceCodeNumbers.concat(uppercaseCharCodesArray);
   }
-  if (lower) {
+  if (prefrencesArray[2]) {
     refernceCodeNumbers = refernceCodeNumbers.concat(lowercaseCharCodesArray);
   }
-  if (number) {
+  if (prefrencesArray[3]) {
     refernceCodeNumbers = refernceCodeNumbers.concat(numbersCharCodesArray);
   }
-  if (symbol) {
+  if (prefrencesArray[4]) {
     refernceCodeNumbers = refernceCodeNumbers.concat(specialCharactersCharCodesArray);
   }
 
@@ -54,23 +59,23 @@ function generatePassword(length, upper, lower, number, symbol) {
   if (!upper && !lower && !number && !symbol) {
     return "";
   } else {
-   
-   for (let i = 0; i < length; i++) {
-     //Choosing a random chracter code number from the array of all the chracter code available for this scenario
-     let randomCharacterCode = refernceCodeNumbers[Math.floor(Math.random() * refernceCodeNumbers.length)];
 
-     //adding the randomly selected character to the empty generatedPassword array. We have to use the String.fromCharCode() method to get the character associated with that particular character code
-     generatedPassword.push(String.fromCharCode(randomCharacterCode));
-   }
-   //returning the generated password. We have to make sure we pass an empty string to this function so it would join the characters together without anything between them
-   console.log(generatedPassword.join(""))
-   return generatedPassword.join("");
-}}
+    for (let i = 0; i < length; i++) {
+      //Choosing a random chracter code number from the array of all the chracter code available for this scenario
+      let randomCharacterCode = refernceCodeNumbers[Math.floor(Math.random() * refernceCodeNumbers.length)];
 
+      //adding the randomly selected character to the empty generatedPassword array. We have to use the String.fromCharCode() method to get the character associated with that particular character code
+      generatedPassword.push(String.fromCharCode(randomCharacterCode));
+    }
+    //returning the generated password. We have to make sure we pass an empty string to this function so it would join the characters together without anything between them
+    console.log(generatedPassword.join(""))
+    return generatedPassword.join("");
+  }
+}
 
 // Write password to the #password input
 function writePassword() {
-  let password = generatePassword();
+  let password = generatePassword(prefrencesArray[0], prefrencesArray[1], prefrencesArray[2], prefrencesArray[3], prefrencesArray[4]);
   let passwordText = document.querySelector('#password');
 
   passwordText.value = password;
@@ -78,5 +83,3 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
-
-askQuestions();
