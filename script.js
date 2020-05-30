@@ -7,7 +7,7 @@ let password = {
   uppercaseLetters: getRandomUpper,
   numbers: getRandomNumber,
   symbols: getRandomSymbol
-}
+};
 
 //Generator Fuctions - https://www.w3schools.com/html/html_charset.asp
 function getRandomLower () {
@@ -31,6 +31,16 @@ function getRandomSymbol () {
   return symbols[Math.floor(Math.random() * symbols.length)];
 }
 
+//asking questions
+function askQuestions() {
+  let numOfChracaters = prompt("Choose the number of characters for your password (between 8 and 128");
+  if (numOfChracaters >= "8" || numOfChracaters <= "128") {
+    let hasUppercase = confirm("Do you want your password to include uppercase letters?");
+    let hasLowercase = confirm("Do you want your password to include lowercase letters?");
+    let hasNumber = confirm("Do you want your password to include numbers?");
+    let hasSymbols = confirm("Do you want your password to include symbols?");
+  }
+}
 
 
 // Write password to the #password input
