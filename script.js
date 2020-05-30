@@ -7,6 +7,11 @@ function getRandomLower () {
    return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
 }
 
+function getRandomUpper () {
+  //selects a random uppercase character based on its number on charset table between and inclusive of 65 to 90 (There are 26 letters in alphabet)
+   return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
+}
+
 
 
 // Write password to the #password input
