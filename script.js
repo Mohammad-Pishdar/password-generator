@@ -31,15 +31,15 @@ function getRandomSymbol () {
   return symbols[Math.floor(Math.random() * symbols.length)];
 }
 
-//asking questions and making sure that the other questions are only asked if the user choses the right number
+//asking questions and making sure that the other questions are only asked if the user choses the right number. We also add a + in front of the prompt to change our resulting variable type from a string to a number that can be used inside the function
 function askQuestions() {
-  let numOfChracaters = prompt("Choose the number of characters for your password (between 8 and 128");
-  console.log(typeof (numOfChracaters));
+  let numOfChracaters = +prompt("Choose the number of characters for your password (between 8 and 128");
   if (numOfChracaters >= "8" || numOfChracaters <= "128") {
     let hasUppercase = confirm("Do you want your password to include uppercase letters?");
     let hasLowercase = confirm("Do you want your password to include lowercase letters?");
     let hasNumber = confirm("Do you want your password to include numbers?");
     let hasSymbols = confirm("Do you want your password to include symbols?");
+    
   } else {
     askQuestions();
   }
