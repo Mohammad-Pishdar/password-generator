@@ -1,6 +1,14 @@
 // Assignment Code
 let generateBtn = document.querySelector('#generate');
 
+//Password object
+let password = {
+  lowercaseLetters: getRandomLower,
+  uppercaseLetters: getRandomUpper,
+  numbers: getRandomNumber,
+  symbols: getRandomSymbol
+}
+
 //Generator Fuctions - https://www.w3schools.com/html/html_charset.asp
 function getRandomLower () {
   //selects a random lowercase character based on its number on charset table between and inclusive of 97 to 121 (There are 26 letters in alphabet)
