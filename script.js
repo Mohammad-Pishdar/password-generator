@@ -39,7 +39,7 @@ function askQuestions() {
     let hasLowercase = confirm("Do you want your password to include lowercase letters?");
     let hasNumber = confirm("Do you want your password to include numbers?");
     let hasSymbols = confirm("Do you want your password to include symbols?");
-    
+    generatePassword(numOfChracaters, hasUppercase, hasLowercase, hasNumber, hasSymbols);
   } else {
     askQuestions();
   }
