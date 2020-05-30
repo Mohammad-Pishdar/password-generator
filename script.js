@@ -31,16 +31,21 @@ function getRandomSymbol () {
   return symbols[Math.floor(Math.random() * symbols.length)];
 }
 
-//asking questions
+//asking questions and making sure that the other questions are only asked if the user choses the right number
 function askQuestions() {
   let numOfChracaters = prompt("Choose the number of characters for your password (between 8 and 128");
+  console.log(typeof (numOfChracaters));
   if (numOfChracaters >= "8" || numOfChracaters <= "128") {
     let hasUppercase = confirm("Do you want your password to include uppercase letters?");
     let hasLowercase = confirm("Do you want your password to include lowercase letters?");
     let hasNumber = confirm("Do you want your password to include numbers?");
     let hasSymbols = confirm("Do you want your password to include symbols?");
+  } else {
+    askQuestions();
   }
 }
+
+askQuestions();
 
 
 // Write password to the #password input
