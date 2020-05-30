@@ -10,6 +10,13 @@ function arrayMaker (num1, num2) {
   return array;
 }
 
+//Creating arrays for each type of characters requiered as the password building criteria namely: uppercase, lowercase, numbers and special characters. Code numbers are taken from: https://www.w3schools.com/html/html_charset.asp
+let uppercaseCharCodesArray = arrayMaker(65, 90);
+let lowercaseCharCodesArray = arrayMaker(97, 122);
+let numbersCharCodesArray = arrayMaker(48, 57);
+let specialCharactersCharCodesArray = arrayMaker(33, 47).concat(arrayMaker(58, 64)).concat(arrayMaker(91, 96)).concat(arrayMaker(123, 126));
+
+
 //asking questions and making sure that the other questions are only asked if the user choses the right number. We also add a + in front of the prompt to change our resulting variable type from a string to a number that can be used inside the function
 function askQuestions() {
   let numOfChracaters = +prompt("Choose the number of characters for your password (between 8 and 128");
