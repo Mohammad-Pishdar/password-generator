@@ -12,6 +12,11 @@ function getRandomUpper () {
    return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
 }
 
+function getRandomNumber () {
+  //selects a random number based on its number on charset table between and inclusive of 48 to 57 (There are 10 number characters including 0)
+   return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
+}
+
 
 
 // Write password to the #password input
