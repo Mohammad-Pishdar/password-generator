@@ -37,12 +37,24 @@ function generatePassword(length, upper, lower, number, symbol) {
 
   //defining another empty array as a starting point that can be concatenated to the arrays we already have based on the criteria the user choose.
   let refernceCodeNumbers = [];
+  if (upper) {
+    refernceCodeNumbers = refernceCodeNumbers.concat(uppercaseCharCodesArray);
+  }
+  if (lower) {
+    refernceCodeNumbers = refernceCodeNumbers.concat(lowercaseCharCodesArray);
+  }
+  if (number) {
+    refernceCodeNumbers = refernceCodeNumbers.concat(numbersCharCodesArray);
+  }
+  if (symbol) {
+    refernceCodeNumbers = refernceCodeNumbers.concat(specialCharactersCharCodesArray);
+  }
 
   //Cheks to see the user chose at least one of the criteria and if not return an empty string.
   if (!upper && !lower && !number && !symbol) {
     return "";
-  } else if (!upper && lower && number && symbol) {
-   refernceCodeNumbers = refernceCodeNumbers.concat(lowercaseCharCodesArray).concat(numbersCharCodesArray).concat(specialCharactersCharCodesArray);
+  } else {
+   
    for (let i = 0; i < length; i++) {
      //Choosing a random chracter code number from the array of all the chracter code available for this scenario
      let randomCharacterCode = refernceCodeNumbers[Math.floor(Math.random() * refernceCodeNumbers.length)];
@@ -51,10 +63,9 @@ function generatePassword(length, upper, lower, number, symbol) {
      generatedPassword.push(String.fromCharCode(randomCharacterCode));
    }
    //returning the generated password. We have to make sure we pass an empty string to this function so it would join the characters together without anything between them
-   console.log(generatedPassword.join(""));
+   console.log(generatedPassword.join(""))
    return generatedPassword.join("");
-}
-}
+}}
 
 
 // Write password to the #password input
