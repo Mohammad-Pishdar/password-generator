@@ -17,6 +17,12 @@ function getRandomNumber () {
    return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
 }
 
+function getRandomSymbol () {
+  //selects a random symbol based on its index number on the defined symbols string varaiable
+  let symbols = "!@#$%^&*()_={}[]?<>.,/"
+  return symbols[Math.floor(Math.random() * symbols.length)];
+}
+
 
 
 // Write password to the #password input
