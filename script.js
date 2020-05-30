@@ -1,34 +1,13 @@
 // Assignment Code
 let generateBtn = document.querySelector('#generate');
 
-//Password object
-let password = {
-  lowercaseLetters: getRandomLower,
-  uppercaseLetters: getRandomUpper,
-  numbers: getRandomNumber,
-  symbols: getRandomSymbol
-};
-
-//Generator Fuctions - https://www.w3schools.com/html/html_charset.asp
-function getRandomLower () {
-  //selects a random lowercase character based on its number on charset table between and inclusive of 97 to 121 (There are 26 letters in alphabet)
-   return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
-}
-
-function getRandomUpper () {
-  //selects a random uppercase character based on its number on charset table between and inclusive of 65 to 90 (There are 26 letters in alphabet)
-   return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
-}
-
-function getRandomNumber () {
-  //selects a random number based on its number on charset table between and inclusive of 48 to 57 (There are 10 number characters including 0)
-   return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
-}
-
-function getRandomSymbol () {
-  //selects a random symbol based on its index number on the defined symbols string varaiable
-  let symbols = "!@#$%^&*()_={}[]?<>.,/"
-  return symbols[Math.floor(Math.random() * symbols.length)];
+//creating a function that makes an array of numbers using a starting point and an end point in order to use it later to make an array of character set numbers for different character types criteria
+function arrayMaker (num1, num2) {
+  let array = [];
+  for (let i = num1; i <= num2; i++) {
+    array.push(i);
+  }
+  return array;
 }
 
 //asking questions and making sure that the other questions are only asked if the user choses the right number. We also add a + in front of the prompt to change our resulting variable type from a string to a number that can be used inside the function
@@ -45,7 +24,24 @@ function askQuestions() {
   }
 }
 
-askQuestions();
+function generatePassword(length, upper, lower, number, symbol) {
+  //start with an empty string that will be our generated password
+  let generatedPassword = [];
+
+  //Cheks to see the user chose at least one of the criteria and if not return an empty string.
+  if (!upper && !lower && !number && !symbol) {
+    return "";
+  } else if (!upper && lower && number && symbol) {
+    functions = [getRandomLower(), getRandomNumber(), getRandomSymbol()];
+    for (let i = 0; i < length; i++) {
+      // let character = functions[Math.floor(Math.random() * functions.length)];
+      console.log(functions[Math.floor(Math.random() * functions.length)]);
+      // generatedPassword.push(character);
+    }
+    console.log(generatedPassword.join(""));
+    return generatedPassword;
+  }
+}
 
 
 // Write password to the #password input
@@ -58,3 +54,5 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
+
+askQuestions();
