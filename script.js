@@ -24,8 +24,8 @@ function askQuestions() {
     let hasUppercase = confirm("Do you want your password to include uppercase letters?");
     let hasLowercase = confirm("Do you want your password to include lowercase letters?");
     let hasNumber = confirm("Do you want your password to include numbers?");
-    let hasSymbols = confirm("Do you want your password to include symbols?");
-    generatePassword(numOfChracaters, hasUppercase, hasLowercase, hasNumber, hasSymbols);
+    let hasSpecialCharacters = confirm("Do you want your password to include special characters?");
+    generatePassword(numOfChracaters, hasUppercase, hasLowercase, hasNumber, hasSpecialCharacters);
   } else {
     askQuestions();
   }
@@ -35,19 +35,25 @@ function generatePassword(length, upper, lower, number, symbol) {
   //start with an empty string that will be our generated password
   let generatedPassword = [];
 
+  //defining another empty array as a starting point that can be concatenated to the arrays we already have based on the criteria the user choose.
+  let refernceCodeNumbers = [];
+
   //Cheks to see the user chose at least one of the criteria and if not return an empty string.
   if (!upper && !lower && !number && !symbol) {
     return "";
   } else if (!upper && lower && number && symbol) {
-    functions = [getRandomLower(), getRandomNumber(), getRandomSymbol()];
-    for (let i = 0; i < length; i++) {
-      // let character = functions[Math.floor(Math.random() * functions.length)];
-      console.log(functions[Math.floor(Math.random() * functions.length)]);
-      // generatedPassword.push(character);
-    }
-    console.log(generatedPassword.join(""));
-    return generatedPassword;
-  }
+   refernceCodeNumbers = refernceCodeNumbers.concat(lowercaseCharCodesArray).concat(numbersCharCodesArray).concat(specialCharactersCharCodesArray);
+   for (let i = 0; i < length; i++) {
+     //Choosing a random chracter code number from the array of all the chracter code available for this scenario
+     let randomCharacterCode = refernceCodeNumbers[Math.floor(Math.random() * refernceCodeNumbers.length)];
+
+     //adding the randomly selected character to the empty generatedPassword array. We have to use the String.fromCharCode() method to get the character associated with that particular character code
+     generatedPassword.push(String.fromCharCode(randomCharacterCode));
+   }
+   //returning the generated password. We have to make sure we pass an empty string to this function so it would join the characters together without anything between them
+   console.log(generatedPassword.join(""));
+   return generatedPassword.join("");
+}
 }
 
 
