@@ -1,5 +1,6 @@
 // Assignment Code
 let generateBtn = document.querySelector('#generate');
+let j = null;
 
 //creating a function that makes an array of numbers using a starting point and an end point in order to use it later to make an array of character set numbers for different character types criteria
 function arrayMaker(num1, num2) {
@@ -17,24 +18,27 @@ let numbersCharCodesArray = arrayMaker(48, 57);
 let specialCharactersCharCodesArray = arrayMaker(33, 47).concat(arrayMaker(58, 64)).concat(arrayMaker(91, 96)).concat(arrayMaker(123, 126));
 
 
-//asking questions and making sure that the other questions are only asked if the user choses the right number. We also add a + in front of the prompt to change our resulting variable type from a string to a number that can be used inside the function
+//asking questions and making sure that the other questions are only asked if the user choses the right number (using a while loop with a dummy j variable with the value of null so in case of the wrong answer we can restart the function becuase of the condition in the while loop). We also add a + in front of the prompt to change our resulting variable type from a string to a number that can be used inside the function
 function askQuestions() {
-  let numOfChracaters = +prompt("Choose the number of characters for your password (between 8 and 128");
-  if (numOfChracaters >= "8" || numOfChracaters <= "128") {
-    let hasUppercase = confirm("Do you want your password to include uppercase letters?");
-    let hasLowercase = confirm("Do you want your password to include lowercase letters?");
-    let hasNumber = confirm("Do you want your password to include numbers?");
-    let hasSpecialCharacters = confirm("Do you want your password to include special characters?");
+  while (j === null) {
+    let numOfChracaters = +prompt("Choose the number of characters for your password (between 8 and 128)");
+    if (numOfChracaters >= 8 && numOfChracaters <= 128) {
+      let hasUppercase = confirm("Do you want your password to include uppercase letters?");
+      let hasLowercase = confirm("Do you want your password to include lowercase letters?");
+      let hasNumber = confirm("Do you want your password to include numbers?");
+      let hasSpecialCharacters = confirm("Do you want your password to include special characters?");
 
-    let prefrencesArray = [numOfChracaters, hasUppercase, hasLowercase, hasNumber, hasSpecialCharacters];
-    return prefrencesArray;
-  } else {
-    askQuestions();
+      let prefrencesArray = [numOfChracaters, hasUppercase, hasLowercase, hasNumber, hasSpecialCharacters];
+      return prefrencesArray;
+    } else {
+      j = null;
+    }
   }
 }
 
 //saving the returned array from askQuestions() function into a variable so it can be used to fill out the required arguments for generatePassword function
 let prefrencesArray = askQuestions();
+console.log(prefrencesArray);
 
 function generatePassword(length, upper, lower, number, symbol) {
   //start with an empty string that will be our generated password
