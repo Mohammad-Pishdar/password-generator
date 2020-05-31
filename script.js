@@ -61,7 +61,7 @@ function generatePassword(length, upper, lower, number, symbol) {
 
   //Cheks to see the user chose at least one of the criteria and if not return an empty string.
   if (!upper && !lower && !number && !symbol) {
-    return "";
+    return "You did not choose any character type. Please refresh the page to start the app again.";
   } else {
 
     for (let i = 0; i < length; i++) {
